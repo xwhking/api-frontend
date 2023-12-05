@@ -5,6 +5,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseDaily = {
+    code?: number;
+    data?: Daily;
+    message?: string;
+  };
+
   type BaseResponseint = {
     code?: number;
     data?: number;
@@ -14,6 +20,12 @@ declare namespace API {
   type BaseResponseInterfaceInfo = {
     code?: number;
     data?: InterfaceInfo;
+    message?: string;
+  };
+
+  type BaseResponseListstring = {
+    code?: number;
+    data?: string[];
     message?: string;
   };
 
@@ -65,6 +77,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseSentences = {
+    code?: number;
+    data?: Sentences;
+    message?: string;
+  };
+
   type BaseResponsestring = {
     code?: number;
     data?: string;
@@ -74,6 +92,12 @@ declare namespace API {
   type BaseResponseUser = {
     code?: number;
     data?: User;
+    message?: string;
+  };
+
+  type BaseResponseUserInterfaceInfo = {
+    code?: number;
+    data?: UserInterfaceInfo;
     message?: string;
   };
 
@@ -94,17 +118,44 @@ declare namespace API {
     echostr?: string;
   };
 
+  type Daily = {
+    content?: string;
+    dateline?: string;
+    fenxiang_img?: string;
+    note?: string;
+  };
+
   type DeleteRequest = {
     id?: string;
+  };
+
+  type getExpressionUsingGETParams = {
+    /** keyword */
+    keyword?: string;
   };
 
   type getInterfaceInfoByIdUsingGETParams = {
     id?: string;
   };
 
+  type getOneSentenceUsingGETParams = {
+    /** type */
+    type?: string;
+  };
+
+  type getPostVOByIdUsingGET1Params = {
+    /** id */
+    id?: string;
+  };
+
   type getPostVOByIdUsingGETParams = {
     /** id */
     id?: string;
+  };
+
+  type getQrCodeUsingGETParams = {
+    /** content */
+    content?: string;
   };
 
   type getUserByIdUsingGETParams = {
@@ -124,6 +175,7 @@ declare namespace API {
   type InterfaceInfo = {
     createTime?: string;
     description?: string;
+    host?: string;
     id?: string;
     isDelete?: number;
     method?: string;
@@ -133,7 +185,7 @@ declare namespace API {
     responseHeader?: string;
     status?: number;
     updateTime?: string;
-    url?: string;
+    uri?: string;
     userId?: string;
   };
 
@@ -317,6 +369,17 @@ declare namespace API {
     userId?: string;
   };
 
+  type Sentences = {
+    content?: string;
+    createTime?: string;
+    fromWho?: string;
+    id?: string;
+    isDelete?: number;
+    sentenceFrom?: string;
+    type?: string;
+    updateTime?: string;
+  };
+
   type uploadFileUsingPOSTParams = {
     biz?: string;
   };
@@ -343,6 +406,38 @@ declare namespace API {
     userAvatar?: string;
     userName?: string;
     userRole?: string;
+  };
+
+  type UserInterfaceInfo = {
+    createTime?: string;
+    id?: string;
+    interfaceInfoId?: string;
+    isDelete?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
+    updateTime?: string;
+    userId?: string;
+  };
+
+  type UserInterfaceInfoAddRequest = {
+    interfaceInfoId?: string;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
+    userId?: string;
+  };
+
+  type UserInterfaceInfoUpdateRequest = {
+    createTime?: string;
+    id?: string;
+    interfaceInfoId?: string;
+    isDelete?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
+    updateTime?: string;
+    userId?: string;
   };
 
   type userLoginByWxOpenUsingGETParams = {

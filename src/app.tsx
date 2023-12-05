@@ -1,14 +1,11 @@
 import Footer from '@/components/Footer';
 import {Question} from '@/components/RightContent';
 import {LinkOutlined} from '@ant-design/icons';
-import type {Settings as LayoutSettings} from '@ant-design/pro-components';
 import {SettingDrawer} from '@ant-design/pro-components';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history, Link} from '@umijs/max';
-import defaultSettings from '../config/defaultSettings';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
 import { requestConfig} from './requestConfig';
-import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
 import {getLoginUserUsingGet} from "@/services/yuapi/userController";
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -35,18 +32,22 @@ export async function getInitialState(): Promise<InitialState> {
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => {
   return {
+    // 渲染 actions
     actionsRender: () => [<Question key="doc"/>],
+    // 渲染头像，支持显示用户名
     avatarProps: {
-      src: initialState?.loginUser?.avatar,
+      src:initialState?.loginUser?.userAvatar ,
       title: <AvatarName/>,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
       },
     },
+    // 渲染页脚
     waterMarkProps: {
       content: initialState?.loginUser?.userName,
     },
     footerRender: () => <Footer/>,
+    // 页面切换时，如果未登录，重定向到 login
     onPageChange: () => {
       const {location} = history;
       // 如果没有登录，重定向到 login
@@ -54,6 +55,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         history.push(loginPath);
       }
     },
+    // 背景图片
     layoutBgImgList: [
       {
         src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
@@ -74,6 +76,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         width: '331px',
       },
     ],
+    // 链接
     links: isDev
       ? [
         <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
@@ -82,6 +85,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         </Link>,
       ]
       : [],
+    // 头部渲染
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
@@ -105,6 +109,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         </>
       );
     },
+    // 合并设置
     ...initialState?.settings,
   };
 };

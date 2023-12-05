@@ -11,6 +11,10 @@
       {
         path: '/user/register',
         component: './User/Register'
+      },
+      {
+        path: '/user/center',
+        component: './User/Center'
       }
       ]
   },
@@ -24,8 +28,6 @@
     name: '管理员页面',
     routes: [
       {icon: 'table', path: '/admin/interface_info', component: './Admin/InterfaceInfo', name: '接口管理'},
-      // { path: '/admin', redirect: '/admin/sub-page' },
-      // { path: '/admin/sub-page', component: './Admin' },
     ],
   },
   // { icon: 'table', path: '/list', component: './InterfaceInfo', name: '表格页' },

@@ -1,6 +1,69 @@
 html,
 body,
 #root {
+  // 设置高度为100%
+  height: 100%;
+  // 设置margin为0
+  margin: 0;
+  // 设置padding为0
+  padding: 0;
+  // 设置字体
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+// 设置颜色变暗
+.colorWeak {
+  filter: invert(80%);
+}
+
+// 设置最小高度为100vh
+.ant-layout {
+  min-height: 100vh;
+}
+// 设置侧边栏的位置
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+
+// 设置canvas的显示方式
+canvas {
+  display: block;
+}
+
+// 设置文本渲染
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 设置列表的样式
+ul,
+ol {
+  list-style: none;
+}
+
+// 媒体查询，当宽度小于768px时，设置表格的宽度为100%，并设置表格的单元格为pre，并设置单元格的span为block
+@media (max-width: 768px) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;

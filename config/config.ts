@@ -130,13 +130,10 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
-      schemaPath: "http://localhost:8101/api/v3/api-docs",
+      schemaPath: "http://localhost:8080/api/v3/api-docs",
       // schemaPath: join(__dirname, 'oneapi.json'),
       projectName: "yuapi"
     },
   ],
-  mfsu: {
-    strategy: 'normal',
-  },
   requestRecord: {},
 });
