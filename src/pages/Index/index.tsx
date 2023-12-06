@@ -15,6 +15,7 @@ const Index: React.FC = () => {
       const res = await listInterfaceInfoByPageUsingGet({
         current,
         pageSize,
+        "status" : 1
       })
       //@ts-ignore
       setList(res.data.records);

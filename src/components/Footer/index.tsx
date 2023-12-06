@@ -3,7 +3,7 @@ import { DefaultFooter } from '@ant-design/pro-components';
 import '@umijs/max';
 import React from 'react';
 const Footer: React.FC = () => {
-  const defaultMessage = '蚂蚁集团体验技术部出品';
+  const defaultMessage = 'xwhking 出品';
   const currentYear = new Date().getFullYear();
   return (
     <DefaultFooter
@@ -13,9 +13,9 @@ const Footer: React.FC = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'Github',
+          title: 'Github',
+          href: 'https://github.com/xwhking',
           blankTarget: true,
         },
         {
@@ -25,9 +25,9 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          key: 'Gitee',
+          title: 'Gitee',
+          href: 'https://gitee.com/zouwxh',
           blankTarget: true,
         },
       ]}

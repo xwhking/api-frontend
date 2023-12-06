@@ -3,11 +3,16 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {getInterfaceInfoByIdUsingGet, invokeUsingPost} from "@/services/yuapi/interfaceInfoController";
 import {Badge, Button, Card, Descriptions, DescriptionsProps, Divider, Form, Input, message} from "antd";
+import {  Typography } from 'antd';
+import {getTimeUsingGet, getUserInterfaceInfoUsingGet} from "@/services/yuapi/userInterfaceInfoController";
+
+const { Text,Paragraph } = Typography;
 
 const InterfaceDetail: React.FC = () => {
   const [invokeLoading,setInvokeLoading] = useState(false);
   const [invokeRes ,setInvokeRes] = useState<any>();
   const [interfaceDetailInfo, setInterfaceDetailInfo] = useState<API.InterfaceInfo>({});
+  const [requestTime,setRequestTime] = useState<number>(0)
   const [formRef] = Form.useForm();
   const onFinish = async (values:any) => {
     setInvokeLoading(true);
@@ -32,8 +37,31 @@ const InterfaceDetail: React.FC = () => {
       message.error("获取接口详细信息失败");
     }
   }
+  const getTimeForRequest =async (interfaceId:any) => {
+    const res = await getTimeUsingGet({
+      "interfaceId" : interfaceId
+    })
+    if(res.data){
+      message.success("获取成功");
+      setRequestTime(res.data.leftNum);
+    }else{
+      message.error(res.message);
+    }
+  }
+  const clickRequest = () => {
+    getTimeForRequest(params.id);
+  }
+  const getUserInterfaceInfo = async (interfaceId:any) => {
+    const res = await getUserInterfaceInfoUsingGet({
+      "interfaceId" : interfaceId
+    });
+    if(res.data){
+      setRequestTime(res.data.leftNum);
+    }
+  }
   useEffect(() => {
     loadInterfaceDetailInfo(String(params.id));
+    getUserInterfaceInfo(String(params.id));
   }, [])
   const params = useParams();
   const items: DescriptionsProps['items'] = [
@@ -47,7 +75,7 @@ const InterfaceDetail: React.FC = () => {
     },
     {
       label: '接口地址',
-      children: interfaceDetailInfo.url ,
+      children: interfaceDetailInfo.uri ,
     },
     {
       label: '接口创建时间',
@@ -80,7 +108,7 @@ const InterfaceDetail: React.FC = () => {
     },
   ];
   formRef.setFieldsValue({
-    "url" : interfaceDetailInfo.url,
+    "url" : interfaceDetailInfo.uri,
     "userRequestParams":interfaceDetailInfo.requestParams
   })
   return (
@@ -92,6 +120,17 @@ const InterfaceDetail: React.FC = () => {
           column={{ xs: 1, sm: 2, md: 3, lg: 3, xl: 4, xxl: 4 }}
           items={items}
         />
+      </Card>
+      <Divider/>
+      <Card title={"请求调用次数"}>
+        当前可用次数： {requestTime}
+        <br/>
+        <Divider/>
+        <Button type="primary" onClick={clickRequest}>
+          请求
+        </Button>
+        <Divider />
+        <span>一次请求只能获取 20 次的调用机会，最多不能超过 40 次</span>
       </Card>
       <Divider/>
       <Card title="在线测试">
@@ -111,7 +150,13 @@ const InterfaceDetail: React.FC = () => {
       </Card>
       <Divider />
       <Card title="返回结果" loading={invokeLoading}>
-        {invokeRes}
+        <Typography>
+          <Paragraph>
+            <Text code>
+              {invokeRes}
+            </Text>
+          </Paragraph>
+        </Typography>
       </Card>
     </PageContainer>
   );

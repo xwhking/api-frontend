@@ -83,6 +83,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseStatisticInterface = {
+    code?: number;
+    data?: StatisticInterface;
+    message?: string;
+  };
+
   type BaseResponsestring = {
     code?: number;
     data?: string;
@@ -158,9 +164,19 @@ declare namespace API {
     content?: string;
   };
 
+  type getTimeUsingGETParams = {
+    /** interfaceId */
+    interfaceId?: string;
+  };
+
   type getUserByIdUsingGETParams = {
     /** id */
     id?: string;
+  };
+
+  type getUserInterfaceInfoUsingGETParams = {
+    /** interfaceId */
+    interfaceId?: string;
   };
 
   type getUserVOByIdUsingGETParams = {
@@ -199,6 +215,12 @@ declare namespace API {
     url?: string;
   };
 
+  type InterfaceInfoStatistic = {
+    id?: string;
+    name?: string;
+    totalNum?: number;
+  };
+
   type InterfaceInfoUpdateRequest = {
     description?: string;
     id?: string;
@@ -235,9 +257,12 @@ declare namespace API {
   };
 
   type LoginUserVO = {
+    accessKey?: string;
     createTime?: string;
     id?: string;
+    secretKey?: string;
     updateTime?: string;
+    userAccount?: string;
     userAvatar?: string;
     userName?: string;
     userProfile?: string;
@@ -378,6 +403,11 @@ declare namespace API {
     sentenceFrom?: string;
     type?: string;
     updateTime?: string;
+  };
+
+  type StatisticInterface = {
+    perInterfacesStatistics?: InterfaceInfoStatistic[];
+    totalNum?: number;
   };
 
   type uploadFileUsingPOSTParams = {

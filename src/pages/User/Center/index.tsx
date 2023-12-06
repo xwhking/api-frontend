@@ -150,6 +150,7 @@ const Center: React.FC = () => {
     if(res.data){
       setOpen(false);
       message.success("修改成功");
+      getCurrentUser();
     }else{
       message.error("修改失败");
       form.setFieldsValue({

@@ -7,6 +7,7 @@ import {history, Link} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
 import { requestConfig} from './requestConfig';
 import {getLoginUserUsingGet} from "@/services/yuapi/userController";
+import {userAvatar} from "@/constant/WelcomeImgConstant";
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -36,7 +37,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
     actionsRender: () => [<Question key="doc"/>],
     // 渲染头像，支持显示用户名
     avatarProps: {
-      src:initialState?.loginUser?.userAvatar ,
+      src:initialState?.loginUser?.userAvatar?initialState?.loginUser?.userAvatar:userAvatar ,
       title: <AvatarName/>,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
@@ -77,14 +78,11 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
       },
     ],
     // 链接
-    links: isDev
-      ? [
-        <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+    links:
+        [<a key="bcdh" href="https://t.zsxq.com/13TAC7RO0" target="_blank">
           <LinkOutlined/>
-          <span>OpenAPI 文档</span>
-        </Link>,
-      ]
-      : [],
+          <span>编程导航</span>
+        </a>,],
     // 头部渲染
     menuHeaderRender: undefined,
     // 自定义 403 页面
